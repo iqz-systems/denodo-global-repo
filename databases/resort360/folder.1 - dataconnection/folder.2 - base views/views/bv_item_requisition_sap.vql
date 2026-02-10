@@ -1,0 +1,68 @@
+﻿CREATE OR REPLACE WRAPPER CUSTOM ds_item_requisition
+    FOLDER = '/1 - dataconnection/2 - base views'
+    DATASOURCENAME=ds_sap_item_requisition
+    PARAMETERS (
+      'Entity Collection *' = 'ZITEMREQUSITIONSet',
+      'Expand Related Entities' = false,
+      'Enable Pagination' = false
+    )
+    OUTPUTSCHEMA (
+        irid = 'IrId' : 'java.lang.Long' (OPT) (sourcetypeid='-5')  NOT NULL SORTABLE,
+        resortid = 'ResortId' : 'java.lang.Long' (OPT) (sourcetypeid='-5')  NOT NULL SORTABLE,
+        irno = 'IrNo' : 'java.lang.String' (OPT) (sourcetypeid='12')  NOT NULL SORTABLE,
+        requestdate = 'RequestDate' : 'java.time.LocalDateTime' (OPT) (sourcetypeid='93')  NOT NULL SORTABLE,
+        irstatus = 'IrStatus' : 'java.lang.String' (OPT) (sourcetypeid='12')  NOT NULL SORTABLE,
+        priority = 'Priority' : 'java.lang.Integer' (OPT) (sourcetypeid='-6')  NOT NULL SORTABLE,
+        supplierid = 'SupplierId' : 'java.lang.Long' (OPT) (sourcetypeid='-5')  NOT NULL SORTABLE,
+        quotationno = 'QuotationNo' : 'java.lang.Long' (OPT) (sourcetypeid='-5')  NOT NULL SORTABLE,
+        quotationref = 'QuotationRef' : 'java.lang.String' (OPT) (sourcetypeid='12')  NOT NULL SORTABLE,
+        irsubtotal = 'IrSubTotal' : 'java.lang.Long' (OPT) (sourcetypeid='-5')  NOT NULL SORTABLE,
+        discount = 'Discount' : 'java.lang.Long' (OPT) (sourcetypeid='-5')  NOT NULL SORTABLE,
+        shippingcharge = 'ShippingCharge' : 'java.lang.Long' (OPT) (sourcetypeid='-5')  NOT NULL SORTABLE,
+        irtotal = 'IrTotal' : 'java.lang.Long' (OPT) (sourcetypeid='-5')  NOT NULL SORTABLE,
+        shippingaddress = 'ShippingAddress' : 'java.lang.String' (OPT) (sourcetypeid='12')  NOT NULL SORTABLE
+    );
+
+CREATE OR REPLACE TABLE bv_item_requisition_sap I18N us_est (
+        irid:long (notnull, sourcetypeid = '-5', description = 'Represents the unique identifier for the item requisition.') TAGS (inventory),
+        resortid:long (notnull, sourcetypeid = '-5', description = 'Specifies the identifier of the resort associated with the requisition.') TAGS (resort),
+        irno:text (notnull, sourcetypeid = '12', description = 'Defines the requisition number assigned to the item requisition.') TAGS (inventory),
+        requestdate:timestamp (notnull, sourcetypeid = '93', description = 'Indicates the date when the item requisition was requested.') TAGS (requisition_date),
+        irstatus:text (notnull, sourcetypeid = '12', description = 'Describes the current status of the item requisition.'),
+        priority:int (notnull, sourcetypeid = '-6', description = 'Represents the priority level assigned to the item requisition.'),
+        supplierid:long (notnull, sourcetypeid = '-5', description = 'Identifies the supplier associated with the requisition.') TAGS (supplier),
+        quotationno:long (notnull, sourcetypeid = '-5', description = 'Provides the quotation number linked to the requisition.'),
+        quotationref:text (notnull, sourcetypeid = '12', description = 'Includes the quotation reference for the requisition.'),
+        irsubtotal:long (notnull, sourcetypeid = '-5', description = 'Specifies the subtotal amount for the requisition before discounts and additional charges.') TAGS (requisition_amount),
+        discount:long (notnull, sourcetypeid = '-5', description = 'Represents the discount applied to the requisition.') TAGS (requisition_amount),
+        shippingcharge:long (notnull, sourcetypeid = '-5', description = 'Indicates the shipping charge associated with the requisition.') TAGS (requisition_amount),
+        irtotal:long (notnull, sourcetypeid = '-5', description = 'Represents the total cost of the requisition, including all charges and discounts.') TAGS (requisition_amount),
+        shippingaddress:text (notnull, sourcetypeid = '12', description = 'Specifies the address where the requisitioned items will be delivered.') TAGS (address)
+    )
+    FOLDER = '/1 - dataconnection/2 - base views'
+    DESCRIPTION = 'The bv_item_requisition_sap view represents a dataset containing detailed information regarding item requisitions. It includes fields such as requisition identifiers, resort IDs, requisition numbers, request dates, requisition statuses, priority levels, supplier IDs, quotation details, subtotal, discount, shipping charges, total cost, and shipping address. This data is structured to provide a comprehensive overview of item requisition transactions.'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD ds_item_requisition(
+        I18N us_est
+        CONSTRAINTS (
+             ADD irid (any) OPT ANY
+             ADD resortid (any) OPT ANY
+             ADD irno (any) OPT ANY
+             ADD requestdate (any) OPT ANY
+             ADD irstatus (any) OPT ANY
+             ADD priority (any) OPT ANY
+             ADD supplierid (any) OPT ANY
+             ADD quotationno (any) OPT ANY
+             ADD quotationref (any) OPT ANY
+             ADD irsubtotal (any) OPT ANY
+             ADD discount (any) OPT ANY
+             ADD shippingcharge (any) OPT ANY
+             ADD irtotal (any) OPT ANY
+             ADD shippingaddress (any) OPT ANY
+        )
+        OUTPUTLIST (discount, irid, irno, irstatus, irsubtotal, irtotal, priority, quotationno, quotationref, requestdate, resortid, shippingaddress, shippingcharge, supplierid
+        )
+        WRAPPER (custom ds_item_requisition)
+    );
+

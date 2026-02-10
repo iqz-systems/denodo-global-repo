@@ -1,0 +1,45 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC bv_amenities
+    FOLDER = '/1 - dataconnection/2 - base views'
+    DATASOURCENAME=ds_sql_resort360db
+    CATALOGNAME='${databases.resort360.folder.1 - dataconnection.folder.2 - base views.views.jdbc.bv_amenities.CATALOGNAME}' 
+    SCHEMANAME='${databases.resort360.folder.1 - dataconnection.folder.2 - base views.views.jdbc.bv_amenities.SCHEMANAME}' 
+    RELATIONNAME='Amenities' 
+    OUTPUTSCHEMA (
+        amenities_id = 'Amenities_ID' :'java.lang.Long' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='19', sourcetypeid='-5', sourcetypename='bigint identity')  NOT NULL SORTABLE IS_AUTOINCREMENT,
+        resort_id = 'Resort_ID' :'java.lang.Long' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='19', sourcetypeid='-5', sourcetypename='bigint')  SORTABLE,
+        amenities_name = 'Amenities_Name' :'java.lang.String' (OPT) (sourcetypesize='100', sourcetypeid='12', sourcetypename='varchar')  SORTABLE,
+        rate = 'Rate' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='4', sourcetyperadix='10', sourcetypesize='19', sourcetypeid='3', sourcetypename='money')  NOT SORTABLE,
+        createddate = 'CreatedDate' :'java.time.LocalDateTime' (OPT) (sourcetypedecimals='3', sourcetypesize='23', sourcetypeid='93', sourcetypename='datetime')  SORTABLE
+    )
+    CONSTRAINT 'PK__Amenitie__1F4A127C4386BEC4' PRIMARY KEY ( 'Amenities_ID' )
+    INDEX 'PK__Amenitie__1F4A127C4386BEC4' CLUSTER UNIQUE PRIMARY ( 'Amenities_ID' );
+
+CREATE OR REPLACE TABLE bv_amenities I18N us_est (
+        amenities_id:long (notnull, autoincrement, sourcetypeid = '-5', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '19', description = 'Serves as a unique identifier for each amenity in the system, ensuring distinction among all amenities.') TAGS (amenities),
+        resort_id:long (sourcetypeid = '-5', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '19', description = 'Identifies the resort associated with each amenity, enabling a linkage between amenities and their respective resorts.') TAGS (resort),
+        amenities_name:text (sourcetypeid = '12', sourcetypesize = '100', description = 'Represents the name of the amenity offered, such as "Helicopter Tour", "Golf", "ATV Ride", and "Zip Lining".') TAGS (amenities),
+        rate:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '4', sourcetypesize = '19', description = 'Specifies the cost or price associated with the amenity, allowing for financial assessment and comparison.'),
+        createddate:timestamp (sourcetypeid = '93', sourcetypedecimals = '3', sourcetypesize = '23', description = 'Indicates the date and time when the amenity record was created, providing a timeline for data management purposes.')
+    )
+    FOLDER = '/1 - dataconnection/2 - base views'
+    DESCRIPTION = 'The bv_amenities view represents a collection of amenities offered by various resorts. It contains detailed information about each amenity, including its unique identifier (amenities_id), the resort it is associated with (resort_id), the name of the amenity (amenities_name), its cost or rate, and the timestamp indicating when the record was created. This view also includes an association with another view, bv_customer_amenities_booking, which provides booking data for these amenities. The bv_amenities view could be used for managing and analyzing resort amenities data, tracking their availability and cost, and linking them to customer bookings for operational and business insights.'
+    PRIMARY KEY ( 'amenities_id' )
+    TAGS (amenities)
+    CACHE OFF
+    BATCHSIZEINCACHE DEFAULT
+    TIMETOLIVEINCACHE NOEXPIRE
+    ADD SEARCHMETHOD bv_amenities(
+        I18N us_est
+        CONSTRAINTS (
+             ADD amenities_id (any) OPT ANY
+             ADD resort_id (any) OPT ANY
+             ADD amenities_name (any) OPT ANY
+             ADD rate (any) OPT ANY
+             ADD createddate (any) OPT ANY
+        )
+        OUTPUTLIST (amenities_id, amenities_name, createddate, rate, resort_id
+        )
+        WRAPPER (jdbc bv_amenities)
+    );
+

@@ -1,0 +1,61 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC bv_customer_amenities_booking
+    FOLDER = '/1 - dataconnection/2 - base views'
+    DATASOURCENAME=ds_sql_resort360db
+    CATALOGNAME='${databases.resort360.folder.1 - dataconnection.folder.2 - base views.views.jdbc.bv_customer_amenities_booking.CATALOGNAME}' 
+    SCHEMANAME='${databases.resort360.folder.1 - dataconnection.folder.2 - base views.views.jdbc.bv_customer_amenities_booking.SCHEMANAME}' 
+    RELATIONNAME='Customer_Amenities_Booking' 
+    OUTPUTSCHEMA (
+        "Customer_Amenities_Booking_ID" = 'Customer_Amenities_Booking_ID' :'java.lang.Long' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='19', sourcetypeid='-5', sourcetypename='bigint')  NOT NULL SORTABLE,
+        resort_id = 'Resort_ID' :'java.lang.Long' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='19', sourcetypeid='-5', sourcetypename='bigint')  SORTABLE,
+        booking_id = 'Booking_ID' :'java.lang.Long' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='19', sourcetypeid='-5', sourcetypename='bigint')  SORTABLE,
+        amenities_id = 'Amenities_ID' :'java.lang.Long' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='19', sourcetypeid='-5', sourcetypename='bigint')  SORTABLE,
+        customer_id = 'Customer_ID' :'java.lang.Long' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='19', sourcetypeid='-5', sourcetypename='bigint')  SORTABLE,
+        booking_date = 'Booking_Date' :'java.time.LocalDate' (OPT) (sourcetypedecimals='0', sourcetypesize='10', sourcetypeid='91', sourcetypename='date')  SORTABLE,
+        booking_time = 'Booking_Time' :'java.lang.String' (OPT) (sourcetypesize='50', sourcetypeid='12', sourcetypename='varchar')  SORTABLE,
+        slot_booked = 'Slot_Booked' :'java.lang.String' (OPT) (sourcetypesize='9', sourcetypeid='12', sourcetypename='varchar')  SORTABLE,
+        no_of_hours = 'No_of_Hours' :'java.lang.Long' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='19', sourcetypeid='-5', sourcetypename='bigint')  SORTABLE,
+        "CreatedDate" = 'CreatedDate' :'java.time.LocalDateTime' (OPT) (sourcetypedecimals='3', sourcetypesize='23', sourcetypeid='93', sourcetypename='datetime')  NOT NULL SORTABLE
+    )
+    CONSTRAINT 'PK__Customer__9F293A0526D3B85D' PRIMARY KEY ( 'Customer_Amenities_Booking_ID' )
+    INDEX 'PK__Customer__9F293A0526D3B85D' CLUSTER UNIQUE PRIMARY ( 'Customer_Amenities_Booking_ID' );
+
+CREATE OR REPLACE TABLE bv_customer_amenities_booking I18N us_est (
+        "Customer_Amenities_Booking_ID":long (notnull, sourcetypeid = '-5', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '19', description = 'Serves as a unique identifier for each customer amenities booking entry, ensuring distinct records in the view.'),
+        resort_id:long (sourcetypeid = '-5', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '19', description = 'Represents the identifier of the resort linked to the amenities booking, enabling identification of the associated resort.'),
+        booking_id:long (sourcetypeid = '-5', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '19', description = 'Denotes the unique identifier for each booking transaction, allowing differentiation between individual bookings.') TAGS (booking),
+        amenities_id:long (sourcetypeid = '-5', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '19', description = 'Specifies the identifier of the amenity tied to the booking, facilitating recognition of the specific amenity utilized.'),
+        customer_id:long (sourcetypeid = '-5', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '19', description = 'Identifies the customer who made the booking, ensuring customer-specific bookings can be tracked effectively.') TAGS (customer),
+        booking_date:localdate (sourcetypeid = '91', sourcetypedecimals = '0', sourcetypesize = '10', description = 'Captures the date when the booking was made, serving as an essential detail for record-keeping and scheduling.') TAGS (booking_date),
+        booking_time:text (sourcetypeid = '12', sourcetypesize = '50', description = 'Indicates the time the booking was confirmed, with examples such as "20:45", "07:04", "20:09", and "08:31".'),
+        slot_booked:text (sourcetypeid = '12', sourcetypesize = '9', description = 'Refers to the reserved time slot for the booking, including values like "Evening", "Morning", "Afternoon", and "Evening".'),
+        no_of_hours:long (sourcetypeid = '-5', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '19', description = 'Indicates the duration of the booking in hours, supporting time management and resource allocation.'),
+        "CreatedDate":timestamp (notnull, sourcetypeid = '93', sourcetypedecimals = '3', sourcetypesize = '23', description = 'Represents the timestamp when the record was created, ensuring traceability and auditability of the booking data.')
+    )
+    FOLDER = '/1 - dataconnection/2 - base views'
+    DESCRIPTION = 'The bv_customer_amenities_booking view contains detailed information about customer bookings for amenities at resorts. It includes essential fields such as the unique identifier for each customer amenities booking (Customer_Amenities_Booking_ID), resort identification (resort_id), booking transaction identifiers (booking_id), specific amenities details (amenities_id), customer information (customer_id), booking date and time (booking_date and booking_time), the reserved time slot (slot_booked), duration of the booking in hours (no_of_hours), and a timestamp for record creation (CreatedDate). This view also has an association with another view, bv_amenities, through the amenities_id field, enabling a connection between booked amenities and their details. 
+
+The bv_customer_amenities_booking view could be used for managing and analyzing customer bookings for resort amenities. It may support scheduling, resource allocation, customer tracking, and auditing, as well as facilitate integration with details of amenities via the associated bv_amenities view.'
+    CONSTRAINT 'PK__Customer__9F293A0526D3B85D' PRIMARY KEY ( 'Customer_Amenities_Booking_ID' )
+    TAGS (amenities, booking, booking_date, customer)
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_customer_amenities_booking(
+        I18N us_est
+        CONSTRAINTS (
+             ADD "Customer_Amenities_Booking_ID" (any) OPT ANY
+             ADD resort_id (any) OPT ANY
+             ADD booking_id (any) OPT ANY
+             ADD amenities_id (any) OPT ANY
+             ADD customer_id (any) OPT ANY
+             ADD booking_date (any) OPT ANY
+             ADD booking_time (any) OPT ANY
+             ADD slot_booked (any) OPT ANY
+             ADD no_of_hours (any) OPT ANY
+             ADD "CreatedDate" (any) OPT ANY
+        )
+        OUTPUTLIST ("CreatedDate", "Customer_Amenities_Booking_ID", amenities_id, booking_date, booking_id, booking_time, customer_id, no_of_hours, resort_id, slot_booked
+        )
+        WRAPPER (jdbc bv_customer_amenities_booking)
+    );
+

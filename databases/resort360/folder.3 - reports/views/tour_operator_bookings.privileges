@@ -1,0 +1,144 @@
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.customer;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.total_bookings;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.repeated_customers;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.arrival_pax;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.resort_requisition_value;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.customer_enquiries;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.year_month_bookings_count;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.resort_monthly_net_profit;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.requisition_details;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.booking_details;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.bookings;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.most_requested_items;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.amenities_bookings;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.booking_lead_time;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.room_category_revenue;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.current_occupancy_rate;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.customer_booking;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.amenities_revenue;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.resorts_with_states;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.supplier_requisition_value;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.customer_longest_stay;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.departure_pax;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.monthly_requisitions;
+
+ALTER ROLE dn_rl_resort360_dev_readonly
+GRANT CONNECT, METADATA, EXECUTE, WRITE ON resort360;
+
+ALTER ROLE dn_rl_resort360_dev_developer
+GRANT ROLE manage_workspaces
+GRANT ADMIN ON resort360;
+
+ALTER ROLE dn_rl_resort360_dev_qa
+GRANT CONNECT, METADATA, EXECUTE, WRITE ON resort360;
+
+ALTER ROLE scheduler_developer
+GRANT ROLE assign_tags
+GRANT ADMIN ON resort360;
+
+ALTER ROLE dn_rl_resort360_dev_data_analyst
+GRANT CONNECT, METADATA, EXECUTE, WRITE ON resort360;
+
+ALTER USER nuvindaravishan
+GRANT CONNECT, CREATE_DATA_SERVICE, CREATE_VIEW, CREATE_FOLDER ON resort360
+GRANT METADATA, EXECUTE, WRITE ON resort360.amenities_bookings
+GRANT METADATA, EXECUTE, WRITE ON resort360.amenities_revenue
+GRANT METADATA, EXECUTE, WRITE ON resort360.arrival_pax
+GRANT METADATA, EXECUTE, WRITE ON resort360.booking_details
+GRANT METADATA, EXECUTE, WRITE ON resort360.booking_lead_time
+GRANT METADATA, EXECUTE, WRITE ON resort360.bookings
+GRANT METADATA, EXECUTE, WRITE ON resort360.confirmed_bookings
+GRANT METADATA, EXECUTE, WRITE ON resort360.current_occupancy_rate
+GRANT METADATA, EXECUTE, WRITE ON resort360.customer
+GRANT METADATA, EXECUTE, WRITE ON resort360.customer_booking
+GRANT METADATA, EXECUTE, WRITE ON resort360.customer_enquiries
+GRANT METADATA, EXECUTE, WRITE ON resort360.customer_longest_stay
+GRANT METADATA, EXECUTE, WRITE ON resort360.daily_conversion_rate
+GRANT METADATA, EXECUTE, WRITE ON resort360.denied_bookings
+GRANT METADATA, EXECUTE, WRITE ON resort360.departure_pax
+GRANT METADATA, EXECUTE, WRITE ON resort360.monthly_requisitions
+GRANT METADATA, EXECUTE, WRITE ON resort360.most_requested_items
+GRANT METADATA, EXECUTE, WRITE ON resort360.r_resorts_final
+GRANT METADATA, EXECUTE, WRITE ON resort360.repeated_customers
+GRANT METADATA, EXECUTE, WRITE ON resort360.requisition_details
+GRANT METADATA, EXECUTE, WRITE ON resort360.resort_monthly_net_profit
+GRANT METADATA, EXECUTE, WRITE ON resort360.resort_requisition_value
+GRANT METADATA, EXECUTE, WRITE ON resort360.resorts_with_states
+GRANT METADATA, EXECUTE, WRITE ON resort360.revenueby_nationality
+GRANT METADATA, EXECUTE, WRITE ON resort360.room_category
+GRANT METADATA, EXECUTE, WRITE ON resort360.room_category_revenue
+GRANT METADATA, EXECUTE, WRITE ON resort360.room_master
+GRANT METADATA, EXECUTE, WRITE ON resort360.supplier_requisition_value
+GRANT METADATA, EXECUTE, WRITE ON resort360.total_bookings
+GRANT METADATA, EXECUTE, WRITE ON resort360.tour_operator_bookings
+GRANT METADATA, EXECUTE, WRITE ON resort360.year_month_bookings_count;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.confirmed_bookings;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.revenueby_nationality;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.daily_conversion_rate;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.tour_operator_bookings;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.r_resorts_final;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.room_category;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.denied_bookings;
+
+ALTER USER nuvindaravishan
+GRANT METADATA, EXECUTE, WRITE ON resort360.room_master;
+

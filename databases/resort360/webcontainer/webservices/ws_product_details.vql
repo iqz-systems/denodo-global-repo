@@ -1,0 +1,5 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+UNDEPLOY IF EXISTS WEBSERVICE ws_product_details;
+
+DEPLOY WEBSERVICE ws_product_details LOGIN = '${databases.resort360.webcontainer.webservices.ws_product_details.LOGIN}' PASSWORD = '${databases.resort360.webcontainer.webservices.ws_product_details.PASSWORD}' ${databases.resort360.webcontainer.webservices.ws_product_details.PASSWORD.ENCRYPTED};
+

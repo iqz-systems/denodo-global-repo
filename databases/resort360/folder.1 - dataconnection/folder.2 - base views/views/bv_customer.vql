@@ -1,0 +1,68 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC bv_customer
+    FOLDER = '/1 - dataconnection/2 - base views'
+    DATASOURCENAME=ds_sql_resort360db
+    CATALOGNAME='${databases.resort360.folder.1 - dataconnection.folder.2 - base views.views.jdbc.bv_customer.CATALOGNAME}' 
+    SCHEMANAME='${databases.resort360.folder.1 - dataconnection.folder.2 - base views.views.jdbc.bv_customer.SCHEMANAME}' 
+    RELATIONNAME='Customer' 
+    OUTPUTSCHEMA (
+        customer_id = 'Customer_ID' :'java.lang.Long' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='19', sourcetypeid='-5', sourcetypename='bigint')  NOT NULL SORTABLE,
+        first_name = 'First_Name' :'java.lang.String' (OPT) (sourcetypesize='50', sourcetypeid='12', sourcetypename='varchar')  SORTABLE,
+        last_name = 'Last_Name' :'java.lang.String' (OPT) (sourcetypesize='50', sourcetypeid='12', sourcetypename='varchar')  SORTABLE,
+        dob = 'DOB' :'java.time.LocalDate' (OPT) (sourcetypedecimals='0', sourcetypesize='10', sourcetypeid='91', sourcetypename='date')  SORTABLE,
+        gender = 'Gender' :'java.lang.String' (OPT) (sourcetypesize='50', sourcetypeid='12', sourcetypename='varchar')  SORTABLE,
+        email = 'Email' :'java.lang.String' (OPT) (sourcetypesize='50', sourcetypeid='12', sourcetypename='varchar')  SORTABLE,
+        nationality = 'Nationality' :'java.lang.String' (OPT) (sourcetypesize='100', sourcetypeid='12', sourcetypename='varchar')  SORTABLE,
+        mobile = 'Mobile' :'java.lang.String' (OPT) (sourcetypesize='50', sourcetypeid='12', sourcetypename='varchar')  SORTABLE,
+        address = 'Address' :'java.lang.String' (OPT) (sourcetypesize='50', sourcetypeid='12', sourcetypename='varchar')  SORTABLE,
+        passportno = 'PassportNo' :'java.lang.String' (OPT) (sourcetypesize='50', sourcetypeid='12', sourcetypename='varchar')  SORTABLE,
+        pax_count = 'Pax_Count' :'java.lang.Long' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='19', sourcetypeid='-5', sourcetypename='bigint')  SORTABLE,
+        state_id = 'State_ID' :'java.lang.String' (OPT) (sourcetypesize='50', sourcetypeid='12', sourcetypename='varchar')  SORTABLE,
+        createddate = 'CreatedDate' :'java.time.LocalDateTime' (OPT) (sourcetypedecimals='3', sourcetypesize='23', sourcetypeid='93', sourcetypename='datetime')  NOT NULL SORTABLE
+    )
+    CONSTRAINT 'PK__Customer__8CB286B9619CCEFF' PRIMARY KEY ( 'Customer_ID' )
+    INDEX 'PK__Customer__8CB286B9619CCEFF' CLUSTER UNIQUE PRIMARY ( 'Customer_ID' );
+
+CREATE OR REPLACE TABLE bv_customer I18N us_est (
+        customer_id:long (notnull, sourcetypeid = '-5', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '19', description = 'Represents a unique identifier assigned to each customer.') TAGS (customer),
+        first_name:text (sourcetypeid = '12', sourcetypesize = '50', description = 'Contains the first name of the customer. It includes values like "Jeff", "Omer", "Mitzie", and "Alleen".') TAGS (customer),
+        last_name:text (sourcetypeid = '12', sourcetypesize = '50', description = 'Stores the last name of the customer. It includes values like "Rivas", "Conley", "Shepard", and "Whitfield".') TAGS (customer),
+        dob:localdate (sourcetypeid = '91', sourcetypedecimals = '0', sourcetypesize = '10', description = 'Indicates the date of birth of the customer, providing insights into their age and demographics.') TAGS (pii),
+        gender:text (sourcetypeid = '12', sourcetypesize = '50', description = 'Specifies the gender of the customer. It includes values like "male", "female", "male", and "female".'),
+        email:text (sourcetypeid = '12', sourcetypesize = '50', description = 'Contains the email address of the customer for communication purposes. It includes values like "rivasj55@yahoo.com", "oconley@yahoo.com", "shepard.m@icloud...", and "whitfield.a@outl...".'),
+        nationality:text (sourcetypeid = '12', sourcetypesize = '100', description = 'Represents the nationality of the customer, reflecting their cultural background. It includes values like "Asian Indian", "Mexican", "Black or African...", and "French".'),
+        mobile:text (sourcetypeid = '12', sourcetypesize = '50', description = 'Holds the mobile phone number of the customer for contact purposes. It includes values like "782-528-8315", "347-021-4764", "113-284-6504", and "421-786-1408".') TAGS (pii),
+        address:text (sourcetypeid = '12', sourcetypesize = '50', description = 'Captures the address of the customer, which may include residential or mailing details. It includes values like "867 Gillette Boulev...", "546 Cadell Green", "1161 Lundys Pike", and "198 Jakey Turnpike".'),
+        passportno:text (sourcetypeid = '12', sourcetypesize = '50', description = 'Contains the passport number of the customer for identification purposes. It includes values like "21er2032208935", "78pp6482893326", "58ur5392509367", and "41eu0017214879".') TAGS (pii),
+        pax_count:long (sourcetypeid = '-5', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '19', description = 'Indicates the number of passengers associated with the customer, reflecting group or family sizes.'),
+        state_id:text (sourcetypeid = '12', sourcetypesize = '50', description = 'Represents a code identifying the state associated with the customer. It includes values like "27", "11", "5", and "9".'),
+        createddate:timestamp (notnull, sourcetypeid = '93', sourcetypedecimals = '3', sourcetypesize = '23', description = 'Records the date and time when the customer record was created in the system.')
+    )
+    FOLDER = '/1 - dataconnection/2 - base views'
+    DESCRIPTION = 'The bv_customer view contains detailed information about customers, including fields such as customer_id as the primary key, first and last names, date of birth, gender, email address, nationality, mobile number, residential address, passport number, passenger count, state identifier, and the creation date of the record. Each field provides relevant data about the customer, such as demographics, contact details, and identification attributes. This view could be used for customer management, including tracking customer demographics, contact information, and identification details. It may support functions such as CRM systems, customer profiling for marketing campaigns, compliance and verification checks, or data analytics for business insights.'
+    PRIMARY KEY ( 'customer_id' )
+    TAGS (customer, pii)
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_customer(
+        I18N us_est
+        CONSTRAINTS (
+             ADD customer_id (any) OPT ANY
+             ADD first_name (any) OPT ANY
+             ADD last_name (any) OPT ANY
+             ADD dob (any) OPT ANY
+             ADD gender (any) OPT ANY
+             ADD email (any) OPT ANY
+             ADD nationality (any) OPT ANY
+             ADD mobile (any) OPT ANY
+             ADD address (any) OPT ANY
+             ADD passportno (any) OPT ANY
+             ADD pax_count (any) OPT ANY
+             ADD state_id (any) OPT ANY
+             ADD createddate (any) OPT ANY
+        )
+        OUTPUTLIST (address, createddate, customer_id, dob, email, first_name, gender, last_name, mobile, nationality, passportno, pax_count, state_id
+        )
+        WRAPPER (jdbc bv_customer)
+    );
+

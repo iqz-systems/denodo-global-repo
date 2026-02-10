@@ -1,0 +1,59 @@
+﻿CREATE OR REPLACE WRAPPER CUSTOM ds_item_requisition_details_copy
+    FOLDER = '/1 - dataconnection/2 - base views'
+    DATASOURCENAME=ds_sap_item_requisition_details
+    PARAMETERS (
+      'Entity Collection *' = 'ZITEM_REQUIDETAISet',
+      'Expand Related Entities' = false,
+      'Enable Pagination' = false
+    )
+    OUTPUTSCHEMA (
+        irdetailid = 'IrDetailId' : 'java.lang.String' (OPT) (sourcetypeid='12')  NOT NULL SORTABLE,
+        resortid = 'ResortId' : 'java.lang.String' (OPT) (sourcetypeid='12')  NOT NULL SORTABLE,
+        irid = 'IrId' : 'java.lang.String' (OPT) (sourcetypeid='12')  NOT NULL SORTABLE,
+        itemid = 'ItemId' : 'java.lang.String' (OPT) (sourcetypeid='12')  NOT NULL SORTABLE,
+        quantity = 'Quantity' : 'java.lang.Integer' (OPT) (sourcetypeid='4')  NOT NULL SORTABLE,
+        rate = 'Rate' : 'java.lang.Long' (OPT) (sourcetypeid='-5')  NOT NULL SORTABLE,
+        total = 'Total' : 'java.lang.Integer' (OPT) (sourcetypeid='4')  NOT NULL SORTABLE,
+        discount = 'Discount' : 'java.lang.Long' (OPT) (sourcetypeid='-5')  NOT NULL SORTABLE,
+        tax = 'Tax' : 'java.lang.Integer' (OPT) (sourcetypeid='4')  NOT NULL SORTABLE,
+        itemtotal = 'ItemTotal' : 'java.lang.Integer' (OPT) (sourcetypeid='4')  NOT NULL SORTABLE,
+        poorderquanty = 'PoOrderQuanty' : 'java.lang.Integer' (OPT) (sourcetypeid='-6')  NOT NULL SORTABLE
+    );
+
+CREATE OR REPLACE TABLE bv_item_requisition_details_sap I18N us_est (
+        irdetailid:text (notnull, sourcetypeid = '12', description = 'Represents the unique identifier for detailed item requisition information within the system.') TAGS (inventory),
+        resortid:text (notnull, sourcetypeid = '12', description = 'Indicates the identifier for the specific resort associated with the requisition.') TAGS (resort),
+        irid:text (notnull, sourcetypeid = '12', description = 'Denotes the identifier for the item requisition, linking it to a particular requisition transaction.') TAGS (inventory),
+        itemid:text (notnull, sourcetypeid = '12', description = 'Specifies the identifier for the item included in the requisition.') TAGS (inventory),
+        quantity:int (notnull, sourcetypeid = '4', description = 'Indicates the number of units of the item requested in the requisition.') TAGS (item_quantity),
+        rate:long (notnull, sourcetypeid = '-5', description = 'Represents the price per unit of the item in the requisition.') TAGS (sales),
+        total:int (notnull, sourcetypeid = '4', description = 'Specifies the total cost of all units of the item before applying discounts or taxes.') TAGS (requisition_amount, sales),
+        discount:long (notnull, sourcetypeid = '-5', description = 'Shows the discount amount applied to the item in the requisition.') TAGS (sales),
+        tax:int (notnull, sourcetypeid = '4', description = 'Indicates the tax amount applied to the item in the requisition.') TAGS (sales),
+        itemtotal:int (notnull, sourcetypeid = '4', description = 'Represents the final total amount for the item, inclusive of discounts and taxes.') TAGS (requisition_amount, sales),
+        poorderquanty:int (notnull, sourcetypeid = '-6', description = 'Specifies the quantity of the item ordered in the associated purchase order.') TAGS (item_quantity)
+    )
+    FOLDER = '/1 - dataconnection/2 - base views'
+    DESCRIPTION = 'The bv_item_requisition_details_sap view represents detailed information about item requisitions within a system. It includes various fields that capture key data points, such as item ID, quantity, rate, total amount, discount, tax, and item-specific totals. Additionally, it tracks purchase order quantities and has identifiers like irid and resortid to associate the requisition with specific contexts or entities.'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD ds_item_requisition_details_copy(
+        I18N us_est
+        CONSTRAINTS (
+             ADD irdetailid (any) OPT ANY
+             ADD resortid (any) OPT ANY
+             ADD irid (any) OPT ANY
+             ADD itemid (any) OPT ANY
+             ADD quantity (any) OPT ANY
+             ADD rate (any) OPT ANY
+             ADD total (any) OPT ANY
+             ADD discount (any) OPT ANY
+             ADD tax (any) OPT ANY
+             ADD itemtotal (any) OPT ANY
+             ADD poorderquanty (any) OPT ANY
+        )
+        OUTPUTLIST (discount, irdetailid, irid, itemid, itemtotal, poorderquanty, quantity, rate, resortid, tax, total
+        )
+        WRAPPER (custom ds_item_requisition_details_copy)
+    );
+

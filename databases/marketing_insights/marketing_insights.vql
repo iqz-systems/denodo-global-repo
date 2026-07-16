@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE DATABASE marketing_insights '';
+
+ALTER DATABASE marketing_insights
+  CHARSET DEFAULT;
+

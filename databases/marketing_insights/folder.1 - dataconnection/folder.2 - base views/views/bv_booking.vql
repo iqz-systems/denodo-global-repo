@@ -68,7 +68,7 @@ CREATE OR REPLACE WRAPPER JDBC "bv_Booking"
     INDEX 'IX_Booking_Room' OTHER ( 'Room_Master_ID' )
     INDEX 'IX_Booking_Status' OTHER ( 'Booking_Status' );
 
-CREATE OR REPLACE TABLE "bv_Booking" I18N us_est (
+CREATE OR REPLACE TABLE bv_booking I18N us_est (
         "Booking_ID":long (notnull, autoincrement, sourcetypeid = '-5', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '19'),
         "Resort_ID":long (notnull, sourcetypeid = '-5', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '19'),
         "Booking_Date":timestamp (notnull, sourcetypeid = '93', sourcetypedecimals = '3', sourcetypesize = '23'),

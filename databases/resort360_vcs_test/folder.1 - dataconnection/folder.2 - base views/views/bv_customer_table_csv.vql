@@ -1,0 +1,74 @@
+﻿CREATE OR REPLACE WRAPPER DF ds_customer_table_csv
+    FOLDER = '/1 - dataconnection/2 - base views'
+    DATASOURCENAME=ds_customer_table_csv
+    OUTPUTSCHEMA (
+        customer_id = 'customer_id',
+        account_number = 'account_number',
+        account_number_normalized = 'account_number_normalized',
+        email = 'email',
+        phone = 'phone',
+        preferred_contact_method = 'preferred_contact_method',
+        customer_since = 'customer_since',
+        account_status = 'account_status',
+        dwelling_type = 'dwelling_type',
+        has_solar = 'has_solar',
+        payment_method = 'payment_method',
+        autopay_enrolled = 'autopay_enrolled',
+        paperless_billing = 'paperless_billing',
+        assistance_program = 'assistance_program',
+        late_payments_last_12m = 'late_payments_last_12m',
+        payment_risk_tier = 'payment_risk_tier',
+        last_contact_date = 'last_contact_date',
+        last_contact_reason = 'last_contact_reason'
+    );
+
+CREATE OR REPLACE TABLE bv_customer_table_csv I18N us_est (
+        customer_id:text,
+        account_number:text,
+        account_number_normalized:text,
+        email:text,
+        phone:text,
+        preferred_contact_method:text,
+        customer_since:text,
+        account_status:text,
+        dwelling_type:text,
+        has_solar:text,
+        payment_method:text,
+        autopay_enrolled:text,
+        paperless_billing:text,
+        assistance_program:text,
+        late_payments_last_12m:text,
+        payment_risk_tier:text,
+        last_contact_date:text,
+        last_contact_reason:text
+    )
+    FOLDER = '/1 - dataconnection/2 - base views'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD ds_customer_table_csv(
+        I18N us_est
+        CONSTRAINTS (
+             ADD customer_id NOS ZERO ()
+             ADD account_number NOS ZERO ()
+             ADD account_number_normalized NOS ZERO ()
+             ADD email NOS ZERO ()
+             ADD phone NOS ZERO ()
+             ADD preferred_contact_method NOS ZERO ()
+             ADD customer_since NOS ZERO ()
+             ADD account_status NOS ZERO ()
+             ADD dwelling_type NOS ZERO ()
+             ADD has_solar NOS ZERO ()
+             ADD payment_method NOS ZERO ()
+             ADD autopay_enrolled NOS ZERO ()
+             ADD paperless_billing NOS ZERO ()
+             ADD assistance_program NOS ZERO ()
+             ADD late_payments_last_12m NOS ZERO ()
+             ADD payment_risk_tier NOS ZERO ()
+             ADD last_contact_date NOS ZERO ()
+             ADD last_contact_reason NOS ZERO ()
+        )
+        OUTPUTLIST (account_number, account_number_normalized, account_status, assistance_program, autopay_enrolled, customer_id, customer_since, dwelling_type, email, has_solar, last_contact_date, last_contact_reason, late_payments_last_12m, paperless_billing, payment_method, payment_risk_tier, phone, preferred_contact_method
+        )
+        WRAPPER (df ds_customer_table_csv)
+    );
+

@@ -1,0 +1,9 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE DF ds_customer_table_csv
+    FOLDER = '/1 - dataconnection/1 - data sources'
+    ROUTE LOCAL 'LocalConnection' '${databases.resort360_vcs_test.folder.1 - dataconnection.folder.1 - data sources.datasources.df.ds_customer_table_csv.ROUTE.LOCAL.PATH}'
+    CHARSET = 'UTF-8'
+    COLUMNDELIMITER = ','
+    ENDOFLINEDELIMITER = '\n'
+    HEADER = TRUE;
+

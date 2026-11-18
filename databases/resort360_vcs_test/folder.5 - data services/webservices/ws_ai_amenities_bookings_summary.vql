@@ -1,0 +1,27 @@
+﻿CREATE OR REPLACE REST WEBSERVICE ws_ai_amenities_bookings_summary
+    CONNECTION (
+        CHUNKSIZE = 1000
+        CHUNKTIMEOUT = 1000
+        QUERYTIMEOUT = 900000
+        POOLENABLED = true
+        POOLINITSIZE = 0
+        POOLMAXACTIVE = 30
+    )
+    DEFAULTREPRESENTATION = JSON
+    SUPPORTEDREPRESENTATIONS (HTML, XML, JSON)    AUTHENTICATION (BASIC VDP)
+
+    RESOURCES (
+        VIEW ai_amenities_bookings_summary FIELDS (
+            customer_identifier : 'long', 
+            customer_full_name : 'text', 
+            customer_email_address : 'text', 
+            customer_mobile_number : 'text', 
+            lifetime_amenities_bookings : 'long'
+        )
+    )
+    OPTIONS ( NULLVALUESASEMPTYXMLELEMENTS = false
+        ALLOW_CORS_ORIGINS (*) DISABLED
+        PROCESS_FUNCTIONS_IN_SELECT_PARAMETER = true ) 
+    OPENAPI2 ( API_VERSION = '1.0.0' ) 
+    FOLDER = '/5 - data services';
+

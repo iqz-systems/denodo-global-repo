@@ -1,0 +1,27 @@
+﻿1/databases/resort360_vcs_test/folder.9 - ai_ready_views/9 - ai_ready_views.vql
+1/tags/amenities.vql
+1/tags/customer_domain.vql
+1/tags/email.vql
+1/tags/mcp.vql
+1/tags/pii.vql
+1/tags/restricted.vql
+*/databases/resort360_vcs_test/folder.3 - reports/3 - reports.vql
+*/tags/pii.vql
+*/tags/address.vql
+*/tags/nationality.vql
+*/tags/restricted.vql
+*/tags/mcp.vql
+*/tags/email.vql
+*/tags/customer_domain.vql
+*/tags/amenities.vql
+*/tags/booking.vql
+*/tags/booking_date.vql
+*/databases/resort360_vcs_test/folder.1 - dataconnection/1 - dataconnection.vql
+*/databases/resort360_vcs_test/folder.1 - dataconnection/folder.2 - base views/2 - base views.vql
+*/databases/resort360_vcs_test/folder.1 - dataconnection/folder.1 - data sources/1 - data sources.vql
+*/databases/resort360_vcs_test/folder.1 - dataconnection/folder.1 - data sources/datasources/jdbc/ds_postgres_resort360.vql
+*/databases/resort360_vcs_test/folder.1 - dataconnection/folder.2 - base views/views/bv_customer.vql
+1/databases/resort360_vcs_test/folder.1 - dataconnection/folder.2 - base views/views/bv_customer_amenities_booking.vql
+*/databases/resort360_vcs_test/folder.1 - dataconnection/folder.2 - base views/views/bv_customer_amenities_booking.vql
+1/databases/resort360_vcs_test/folder.3 - reports/views/customer.vql
+*/databases/resort360_vcs_test/folder.3 - reports/views/customer.vql

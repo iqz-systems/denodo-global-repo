@@ -1,0 +1,14 @@
+﻿CREATE OR REPLACE VIEW ai_amenities_bookings_summary FOLDER = '/9 - ai_ready_views' DESCRIPTION = 'The ai_amenities_bookings_summary view provides one row per customer with their core identification and contact details together with the total number of resort amenities they have booked over their lifetime. Fields include customer_identifier (unique customer ID), customer_full_name (formatted as "Last, First"), customer_email_address, customer_mobile_number, and lifetime_amenities_bookings (count of all amenity bookings ever made by the customer, regardless of booking status). Customers who have never booked an amenity are included with a count of 0. This view could be used to identify the most engaged amenity users, target customers for amenity promotions or loyalty offers, find customers who have never used amenities, and answer natural-language questions about customer amenity usage.'
+    PRIMARY KEY ( 'customer_identifier' )
+    TAGS (amenities, customer_domain, email, mcp, restricted) (
+    customer_identifier (description = 'Represents a unique identifier assigned to each customer, ensuring individual distinction within the system.'),
+    customer_full_name (description = 'Combines the last and first names of the customer into a complete name in the format "Last, First". It includes values like "Malone, Sachiko" and "Zamora, Janett".') TAGS (customer_domain),
+    customer_email_address (description = 'Contains the email address of the customer, facilitating communication and notifications.') TAGS (email),
+    customer_mobile_number (description = 'Holds the mobile phone number of the customer, enabling direct contact and communication.') TAGS (pii, restricted),
+    lifetime_amenities_bookings (description = 'Total number of amenity bookings the customer has made over their lifetime, across all resorts and booking statuses. Customers with no amenity bookings have a value of 0.') TAGS (amenities)
+ )
+ AS SELECT customer.customer_identifier AS customer_identifier, customer.full_customer_name AS customer_full_name, customer.customer_email_address AS customer_email_address, customer.customer_mobile_number AS customer_mobile_number, count(bv_customer_amenities_booking.customer_amenities_booking_id) AS lifetime_amenities_bookings FROM customer AS customer LEFT OUTER JOIN bv_customer_amenities_booking AS bv_customer_amenities_booking ON customer.customer_identifier = bv_customer_amenities_booking.customer_id GROUP BY customer.customer_identifier, customer.full_customer_name, customer.customer_email_address, customer.customer_mobile_number;
+
+ALTER VIEW ai_amenities_bookings_summary
+ LAYOUT (customer = [117, 89, 200, 200], bv_customer_amenities_booking = [593, 60, 200, 200]);
+

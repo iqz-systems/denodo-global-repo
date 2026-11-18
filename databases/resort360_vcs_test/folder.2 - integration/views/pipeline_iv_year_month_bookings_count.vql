@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW pipeline_iv_year_month_bookings_count FOLDER = '/2 - integration' AS SELECT iv_year_month_bookings_count.year AS year, iv_year_month_bookings_count.month AS month, iv_year_month_bookings_count.total_bookings AS total_bookings FROM iv_year_month_bookings_count;
+
+ALTER VIEW pipeline_iv_year_month_bookings_count
+ LAYOUT (iv_year_month_bookings_count = [20, 20, 200, 200]);
+

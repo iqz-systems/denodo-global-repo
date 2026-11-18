@@ -1,0 +1,53 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC bv_pg_date
+    FOLDER = '/1 - dataconnection/2 - base views'
+    DATASOURCENAME=ds_postgres_resort360
+    SCHEMANAME='${databases.resort360_vcs_test.folder.1 - dataconnection.folder.2 - base views.views.jdbc.bv_pg_date.SCHEMANAME}' 
+    RELATIONNAME='date' ESCAPE
+    OUTPUTSCHEMA (
+        datekey = 'datekey' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='int4')  NOT NULL SORTABLE,
+        date = 'date' :'java.time.LocalDate' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='13', sourcetypeid='91', sourcetypename='date')  ESCAPE NOT NULL SORTABLE,
+        year = 'year' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='int4')  ESCAPE NOT NULL SORTABLE,
+        quarter = 'quarter' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='int4')  NOT NULL SORTABLE,
+        month = 'month' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='int4')  ESCAPE NOT NULL SORTABLE,
+        monthname = 'monthname' :'java.lang.String' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='200', sourcetypeid='12', sourcetypename='varchar')  NOT NULL SORTABLE,
+        day = 'day' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='int4')  ESCAPE NOT NULL SORTABLE,
+        weekdayname = 'weekdayname' :'java.lang.String' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='200', sourcetypeid='12', sourcetypename='varchar')  NOT NULL SORTABLE,
+        isweekend = 'isweekend' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='2', sourcetypesize='1', sourcetypeid='-7', sourcetypename='int')  NOT NULL SORTABLE
+    )
+    CONSTRAINT 'pk_date' PRIMARY KEY ( 'datekey' )
+    INDEX 'pk_date' OTHER UNIQUE PRIMARY ( 'datekey' );
+
+CREATE OR REPLACE TABLE bv_date I18N us_est (
+        datekey:int (notnull, sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        date:localdate (notnull, sourcetypeid = '91', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '13'),
+        year:int (notnull, sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        quarter:int (notnull, sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        month:int (notnull, sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        monthname:text (notnull, sourcetypeid = '-9', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '200'),
+        day:int (notnull, sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        weekdayname:text (notnull, sourcetypeid = '-9', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '200'),
+        isweekend:int (notnull, sourcetypeid = '-7', sourcetyperadix = '2', sourcetypedecimals = '0', sourcetypesize = '1')
+    )
+    FOLDER = '/1 - dataconnection/2 - base views'
+    CONSTRAINT 'pk_date' PRIMARY KEY ( 'datekey' )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_pg_date(
+        I18N us_est
+        CONSTRAINTS (
+             ADD datekey (any) OPT ANY
+             ADD date (any) OPT ANY
+             ADD year (any) OPT ANY
+             ADD quarter (any) OPT ANY
+             ADD month (any) OPT ANY
+             ADD monthname (any) OPT ANY
+             ADD day (any) OPT ANY
+             ADD weekdayname (any) OPT ANY
+             ADD isweekend (any) OPT ANY
+        )
+        OUTPUTLIST (date, datekey, day, isweekend, month, monthname, quarter, weekdayname, year
+        )
+        WRAPPER (jdbc bv_pg_date)
+    );
+

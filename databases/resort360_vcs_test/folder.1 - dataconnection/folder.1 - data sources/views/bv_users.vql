@@ -1,0 +1,60 @@
+﻿CREATE OR REPLACE WRAPPER JDBC bv_users
+    FOLDER = '/1 - dataconnection/1 - data sources'
+    DATASOURCENAME=ds_postgres_resort360
+    SQLSENTENCE='select * from dbo.users'   
+    OUTPUTSCHEMA (
+        user_id = 'user_id' :'java.lang.Long' (sourcetypedecimals='0', sourcetypesize='19', sourcetypeid='-5', sourcetypename='bigserial')  NOT NULL SORTABLE NOT UPDATEABLE,
+        resort_id = 'resort_id' :'java.lang.Long' (sourcetypedecimals='0', sourcetypesize='19', sourcetypeid='-5', sourcetypename='int8')  SORTABLE NOT UPDATEABLE,
+        username = 'username' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='100', sourcetypeid='12', sourcetypename='varchar')  NOT NULL SORTABLE NOT UPDATEABLE,
+        email = 'email' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='200', sourcetypeid='12', sourcetypename='varchar')  NOT NULL SORTABLE NOT UPDATEABLE,
+        password_hash = 'password_hash' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='200', sourcetypeid='12', sourcetypename='varchar')  NOT NULL SORTABLE NOT UPDATEABLE,
+        first_name = 'first_name' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='500', sourcetypeid='12', sourcetypename='varchar')  NOT NULL SORTABLE NOT UPDATEABLE,
+        last_name = 'last_name' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='500', sourcetypeid='12', sourcetypename='varchar')  NOT NULL SORTABLE NOT UPDATEABLE,
+        department = 'department' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='500', sourcetypeid='12', sourcetypename='varchar')  SORTABLE NOT UPDATEABLE,
+        position = 'position' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='500', sourcetypeid='12', sourcetypename='varchar')  ESCAPE SORTABLE NOT UPDATEABLE,
+        is_active = 'is_active' :'java.lang.Integer' (sourcetypedecimals='0', sourcetypesize='10', sourcetypeid='4', sourcetypename='int4')  NOT NULL SORTABLE NOT UPDATEABLE,
+        last_login_date = 'last_login_date' :'java.time.LocalDate' (sourcetypedecimals='0', sourcetypesize='13', sourcetypeid='91', sourcetypename='date')  SORTABLE NOT UPDATEABLE,
+        createddate = 'createddate' :'java.time.LocalDate' (sourcetypedecimals='0', sourcetypesize='13', sourcetypeid='91', sourcetypename='date')  NOT NULL SORTABLE NOT UPDATEABLE,
+        modifieddate = 'modifieddate' :'java.time.LocalDate' (sourcetypedecimals='0', sourcetypesize='13', sourcetypeid='91', sourcetypename='date')  SORTABLE NOT UPDATEABLE
+    );
+
+CREATE OR REPLACE TABLE bv_users I18N us_est (
+        user_id:long (notnull, sourcetypeid = '-5', sourcetypedecimals = '0', sourcetypesize = '19'),
+        resort_id:long (sourcetypeid = '-5', sourcetypedecimals = '0', sourcetypesize = '19'),
+        username:text (notnull, sourcetypeid = '-9', sourcetypedecimals = '0', sourcetypesize = '100', description = 'username'),
+        email:text (notnull, sourcetypeid = '-9', sourcetypedecimals = '0', sourcetypesize = '200'),
+        password_hash:text (notnull, sourcetypeid = '-9', sourcetypedecimals = '0', sourcetypesize = '200'),
+        first_name:text (notnull, sourcetypeid = '-9', sourcetypedecimals = '0', sourcetypesize = '500'),
+        last_name:text (notnull, sourcetypeid = '-9', sourcetypedecimals = '0', sourcetypesize = '500'),
+        department:text (sourcetypeid = '-9', sourcetypedecimals = '0', sourcetypesize = '500'),
+        position:text (sourcetypeid = '-9', sourcetypedecimals = '0', sourcetypesize = '500'),
+        is_active:int (notnull, sourcetypeid = '4', sourcetypedecimals = '0', sourcetypesize = '10'),
+        last_login_date:localdate (sourcetypeid = '91', sourcetypedecimals = '0', sourcetypesize = '13'),
+        createddate:localdate (notnull, sourcetypeid = '91', sourcetypedecimals = '0', sourcetypesize = '13'),
+        modifieddate:localdate (sourcetypeid = '91', sourcetypedecimals = '0', sourcetypesize = '13')
+    )
+    FOLDER = '/1 - dataconnection/1 - data sources'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_users(
+        I18N us_est
+        CONSTRAINTS (
+             ADD user_id NOS ZERO ()
+             ADD resort_id NOS ZERO ()
+             ADD username NOS ZERO ()
+             ADD email NOS ZERO ()
+             ADD password_hash NOS ZERO ()
+             ADD first_name NOS ZERO ()
+             ADD last_name NOS ZERO ()
+             ADD department NOS ZERO ()
+             ADD position NOS ZERO ()
+             ADD is_active NOS ZERO ()
+             ADD last_login_date NOS ZERO ()
+             ADD createddate NOS ZERO ()
+             ADD modifieddate NOS ZERO ()
+        )
+        OUTPUTLIST (createddate, department, email, first_name, is_active, last_login_date, last_name, modifieddate, password_hash, position, resort_id, user_id, username
+        )
+        WRAPPER (jdbc bv_users)
+    );
+

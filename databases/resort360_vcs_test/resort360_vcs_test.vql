@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE DATABASE resort360_vcs_test 'Test DB for VCS and Claude';
+
+ALTER DATABASE resort360_vcs_test
+  CHARSET DEFAULT;
+

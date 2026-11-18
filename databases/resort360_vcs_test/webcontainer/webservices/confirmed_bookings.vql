@@ -1,0 +1,5 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+UNDEPLOY IF EXISTS WEBSERVICE confirmed_bookings;
+
+DEPLOY WEBSERVICE confirmed_bookings LOGIN = '${databases.resort360_vcs_test.webcontainer.webservices.confirmed_bookings.LOGIN}' PASSWORD = '${databases.resort360_vcs_test.webcontainer.webservices.confirmed_bookings.PASSWORD}' ${databases.resort360_vcs_test.webcontainer.webservices.confirmed_bookings.PASSWORD.ENCRYPTED};
+

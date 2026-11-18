@@ -1,0 +1,27 @@
+﻿CREATE OR REPLACE METRIC VIEW new_metric_view
+    FOLDER = '/3 - reports'
+    SOURCES (
+        amenities_revenue AS amenities_revenue    
+    )
+    DIMENSIONS (
+        amenities_revenue(
+            amenity_name AS amenities_revenue.amenity_name,
+            creation_timestamp AS amenities_revenue.creation_timestamp,
+            "Booking_Status" AS amenities_revenue."Booking_Status",
+            "ModifiedDate" AS amenities_revenue."ModifiedDate",
+            "ModifiedBy" AS amenities_revenue."ModifiedBy",
+            "Currency_ID" AS amenities_revenue."Currency_ID",
+            "Special_Requests" AS amenities_revenue."Special_Requests",
+            "Cancellation_Reason" AS amenities_revenue."Cancellation_Reason",
+            "Cancelled_By" AS amenities_revenue."Cancelled_By",
+            "Cancelled_Date" AS amenities_revenue."Cancelled_Date"
+        )    
+    )
+    METRICS (
+        total_revenue AS sum(amenities_revenue.amenity_revenue)    
+    )
+;
+
+ALTER VIEW new_metric_view
+ LAYOUT (amenities_revenue = [20, 20, 200, 200]);
+

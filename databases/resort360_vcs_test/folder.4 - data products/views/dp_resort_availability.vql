@@ -1,0 +1,16 @@
+﻿CREATE OR REPLACE VIEW dp_resort_availability FOLDER = '/4 - data products' DESCRIPTION = 'The dp_resort_availability view provides a comprehensive dataset focused on the operational status of resorts. It includes detailed information on the availability and utilization of rooms, encompassing fields that describe resort identifiers, resort names, record dates, total room counts, occupied and vacant room numbers, room occupancy rates, and overall occupancy status. This view captures a snapshot of room-related data for resorts, enabling the analysis of room availability and usage trends. The dp_resort_availability view can be used to monitor and analyze room availability and occupancy patterns in resorts. This information is valuable for resource management, operational planning, and understanding the performance of resorts. It can also assist in identifying trends in room utilization and support decision-making for improving efficiency and customer satisfaction in the hospitality industry.' 
+    TAGS (mcp, resort, room_status) (
+    "Resort identifier" (description = 'Represents a unique identifier for each resort, enabling the distinction of resorts within the dataset.'),
+    "Resort name" (description = 'Specifies the name of the resort, providing a recognizable label for each resort in the dataset.'),
+    "Record date" (description = 'Indicates the specific date on which the room-related data for the resort is documented.'),
+    "Total room count" (description = 'Denotes the total number of rooms available at the resort, providing insight into its capacity.'),
+    "Occupied rooms" (description = 'Reflects the number of rooms currently being utilized or occupied at the resort.'),
+    "Vacant rooms" (description = 'Indicates the number of rooms that are unoccupied or available at the resort.'),
+    "Room occupancy rate" (description = 'Represents the percentage or proportion of rooms occupied relative to the total room count.'),
+    "Occupancy status" (description = 'Describes the current occupancy condition of the resort, such as fully occupied or partially vacant.')
+ )
+ AS SELECT cor.resort_identifier AS "Resort identifier", rws.resort_name AS "Resort name", cor.record_date AS "Record date", cor.total_room_count AS "Total room count", cor.occupied_rooms AS "Occupied rooms", cor.vacant_rooms AS "Vacant rooms", cor.room_occupancy_rate AS "Room occupancy rate", case WHEN (cor.room_occupancy_rate >= 0.90) THEN 'HIGH_OCCUPANCY_PRESSURE' WHEN (cor.room_occupancy_rate >= 0.70) THEN 'HEALTHY_OCCUPANCY' WHEN (cor.room_occupancy_rate >= 0.40) THEN 'MODERATE_OCCUPANCY' ELSE 'LOW_OCCUPANCY' END AS "Occupancy status" FROM current_occupancy_rate AS cor LEFT OUTER JOIN resorts_with_states AS rws ON cor.resort_identifier = rws.resort_id ;
+
+ALTER VIEW dp_resort_availability
+ LAYOUT (current_occupancy_rate = [0, 0, 200, 200], resorts_with_states = [0, 200, 200, 200]);
+

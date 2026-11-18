@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW rajshri_f_bv_room_category FOLDER = '/2 - integration' DESCRIPTION = 'Sample data here.'  AS SELECT f_bv_room_category.room_category_id AS room_category_id, f_bv_room_category.room_type AS room_type, f_bv_room_category.room_category_desc AS room_category_desc FROM f_bv_room_category;
+
+ALTER VIEW rajshri_f_bv_room_category
+ LAYOUT (f_bv_room_category = [105, 90, 200, 200]);
+

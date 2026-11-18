@@ -1,0 +1,145 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC bv_v_booking
+    FOLDER = '/1 - dataconnection/2 - base views'
+    DATASOURCENAME=ds_postgres_resort360
+    SCHEMANAME='${databases.resort360_vcs_test.folder.1 - dataconnection.folder.2 - base views.views.jdbc.bv_v_booking.SCHEMANAME}' 
+    RELATIONNAME='booking' 
+    OUTPUTSCHEMA (
+        booking_id = 'booking_id' :'java.lang.Long' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='19', sourcetypeid='-5', sourcetypename='int8')  NOT NULL SORTABLE IS_AUTOINCREMENT,
+        resort_id = 'resort_id' :'java.lang.Long' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='19', sourcetypeid='-5', sourcetypename='int8')  NOT NULL SORTABLE,
+        booking_date = 'booking_date' :'java.time.LocalDate' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='13', sourcetypeid='91', sourcetypename='date')  NOT NULL SORTABLE,
+        booking_type_id = 'booking_type_id' :'java.lang.Long' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='19', sourcetypeid='-5', sourcetypename='int8')  NOT NULL SORTABLE,
+        tour_operator_id = 'tour_operator_id' :'java.lang.Long' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='19', sourcetypeid='-5', sourcetypename='int8')  SORTABLE,
+        tour_operator_contract_id = 'tour_operator_contract_id' :'java.lang.Long' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='19', sourcetypeid='-5', sourcetypename='int8')  SORTABLE,
+        customer_id = 'customer_id' :'java.lang.Long' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='19', sourcetypeid='-5', sourcetypename='int8')  NOT NULL SORTABLE,
+        arrival_date = 'arrival_date' :'java.time.LocalDate' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='13', sourcetypeid='91', sourcetypename='date')  NOT NULL SORTABLE,
+        arrival_time = 'arrival_time' :'java.time.LocalTime' (OPT) (sourcetypedecimals='6', sourcetyperadix='10', sourcetypesize='15', sourcetypeid='92', sourcetypename='time')  SORTABLE,
+        no_of_pax = 'no_of_pax' :'java.lang.Long' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='19', sourcetypeid='-5', sourcetypename='int8')  NOT NULL SORTABLE,
+        reservation_start_date = 'reservation_start_date' :'java.time.LocalDate' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='13', sourcetypeid='91', sourcetypename='date')  NOT NULL SORTABLE,
+        reservation_end_date = 'reservation_end_date' :'java.time.LocalDate' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='13', sourcetypeid='91', sourcetypename='date')  NOT NULL SORTABLE,
+        no_of_days = 'no_of_days' :'java.lang.Long' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='19', sourcetypeid='-5', sourcetypename='int8')  NOT NULL SORTABLE,
+        is_checked_in = 'is_checked_in' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='int4')  NOT NULL SORTABLE,
+        room_master_id = 'room_master_id' :'java.lang.Long' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='19', sourcetypeid='-5', sourcetypename='int8')  SORTABLE,
+        room_fare = 'room_fare' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='2', sourcetyperadix='10', sourcetypesize='8', sourcetypeid='2', sourcetypename='numeric')  NOT NULL SORTABLE,
+        amount_before_discount = 'amount_before_discount' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='2', sourcetyperadix='10', sourcetypesize='8', sourcetypeid='2', sourcetypename='numeric')  NOT NULL SORTABLE,
+        percentagediscount = 'percentagediscount' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='2', sourcetyperadix='10', sourcetypesize='5', sourcetypeid='2', sourcetypename='numeric')  SORTABLE,
+        final_amount = 'final_amount' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='2', sourcetyperadix='10', sourcetypesize='8', sourcetypeid='2', sourcetypename='numeric')  NOT NULL SORTABLE,
+        departure_date = 'departure_date' :'java.time.LocalDate' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='13', sourcetypeid='91', sourcetypename='date')  SORTABLE,
+        departure_time = 'departure_time' :'java.time.LocalTime' (OPT) (sourcetypedecimals='6', sourcetyperadix='10', sourcetypesize='15', sourcetypeid='92', sourcetypename='time')  SORTABLE,
+        is_checked_out = 'is_checked_out' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='int4')  NOT NULL SORTABLE,
+        customer_enquiry_id = 'customer_enquiry_id' :'java.lang.Long' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='19', sourcetypeid='-5', sourcetypename='int8')  SORTABLE,
+        booking_status = 'booking_status' :'java.lang.String' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='20', sourcetypeid='12', sourcetypename='varchar')  SORTABLE,
+        createddate = 'createddate' :'java.time.LocalDate' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='13', sourcetypeid='91', sourcetypename='date')  NOT NULL SORTABLE,
+        modifieddate = 'modifieddate' :'java.time.LocalDate' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='13', sourcetypeid='91', sourcetypename='date')  SORTABLE,
+        modifiedby = 'modifiedby' :'java.lang.Long' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='19', sourcetypeid='-5', sourcetypename='int8')  SORTABLE,
+        currency_id = 'currency_id' :'java.lang.Long' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='19', sourcetypeid='-5', sourcetypename='int8')  SORTABLE,
+        tax_amount = 'tax_amount' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='2', sourcetyperadix='10', sourcetypesize='8', sourcetypeid='2', sourcetypename='numeric')  SORTABLE,
+        special_requests = 'special_requests' :'java.lang.String' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='2000', sourcetypeid='12', sourcetypename='varchar')  SORTABLE,
+        cancellation_reason = 'cancellation_reason' :'java.lang.String' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='5000', sourcetypeid='12', sourcetypename='varchar')  SORTABLE,
+        cancelled_by = 'cancelled_by' :'java.lang.Long' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='19', sourcetypeid='-5', sourcetypename='int8')  SORTABLE,
+        cancelled_date = 'cancelled_date' :'java.time.LocalDate' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='13', sourcetypeid='91', sourcetypename='date')  SORTABLE
+    )
+    CONSTRAINT 'pk_booking' PRIMARY KEY ( 'booking_id' )
+    CONSTRAINT 'fk_booking_type' FOREIGN KEY ( 'booking_type_id' ) 
+    REFERENCES '${databases.resort360_vcs_test.folder.1 - dataconnection.folder.2 - base views.views.jdbc.bv_v_booking.SCHEMANAME}'.'booking_type'( 'booking_type_id' )  ON UPDATE NO ACTION  ON DELETE NO ACTION NOT DEFERRABLE 
+    CONSTRAINT 'fk_booking_currency' FOREIGN KEY ( 'currency_id' ) 
+    REFERENCES '${databases.resort360_vcs_test.folder.1 - dataconnection.folder.2 - base views.views.jdbc.bv_v_booking.SCHEMANAME}'.'currency'( 'currency_id' )  ON UPDATE NO ACTION  ON DELETE NO ACTION NOT DEFERRABLE 
+    CONSTRAINT 'fk_booking_customer' FOREIGN KEY ( 'customer_id' ) 
+    REFERENCES '${databases.resort360_vcs_test.folder.1 - dataconnection.folder.2 - base views.views.jdbc.bv_v_booking.SCHEMANAME}'.'customer'( 'customer_id' )  ON UPDATE NO ACTION  ON DELETE NO ACTION NOT DEFERRABLE 
+    CONSTRAINT 'fk_booking_customer_enquiry' FOREIGN KEY ( 'customer_enquiry_id' ) 
+    REFERENCES '${databases.resort360_vcs_test.folder.1 - dataconnection.folder.2 - base views.views.jdbc.bv_v_booking.SCHEMANAME}'.'customer_enquiry'( 'customer_enquiry_id' )  ON UPDATE NO ACTION  ON DELETE NO ACTION NOT DEFERRABLE 
+    CONSTRAINT 'fk_booking_resort' FOREIGN KEY ( 'resort_id' ) 
+    REFERENCES '${databases.resort360_vcs_test.folder.1 - dataconnection.folder.2 - base views.views.jdbc.bv_v_booking.SCHEMANAME}'.'resort'( 'resort_id' )  ON UPDATE NO ACTION  ON DELETE NO ACTION NOT DEFERRABLE 
+    CONSTRAINT 'fk_booking_room_master' FOREIGN KEY ( 'room_master_id' ) 
+    REFERENCES '${databases.resort360_vcs_test.folder.1 - dataconnection.folder.2 - base views.views.jdbc.bv_v_booking.SCHEMANAME}'.'room_master'( 'room_master_id' )  ON UPDATE NO ACTION  ON DELETE NO ACTION NOT DEFERRABLE 
+    CONSTRAINT 'fk_booking_tour_operator' FOREIGN KEY ( 'tour_operator_id' ) 
+    REFERENCES '${databases.resort360_vcs_test.folder.1 - dataconnection.folder.2 - base views.views.jdbc.bv_v_booking.SCHEMANAME}'.'tour_operator'( 'tour_operator_id' )  ON UPDATE NO ACTION  ON DELETE NO ACTION NOT DEFERRABLE 
+    CONSTRAINT 'fk_booking_tour_operator_contract' FOREIGN KEY ( 'tour_operator_contract_id' ) 
+    REFERENCES '${databases.resort360_vcs_test.folder.1 - dataconnection.folder.2 - base views.views.jdbc.bv_v_booking.SCHEMANAME}'.'tour_operator_contract'( 'tour_operator_contract_id' )  ON UPDATE NO ACTION  ON DELETE NO ACTION NOT DEFERRABLE 
+    CONSTRAINT 'fk_booking_cancelledby' FOREIGN KEY ( 'cancelled_by' ) 
+    REFERENCES '${databases.resort360_vcs_test.folder.1 - dataconnection.folder.2 - base views.views.jdbc.bv_v_booking.SCHEMANAME}'.'users'( 'user_id' )  ON UPDATE NO ACTION  ON DELETE NO ACTION NOT DEFERRABLE 
+    CONSTRAINT 'fk_booking_modifiedby' FOREIGN KEY ( 'modifiedby' ) 
+    REFERENCES '${databases.resort360_vcs_test.folder.1 - dataconnection.folder.2 - base views.views.jdbc.bv_v_booking.SCHEMANAME}'.'users'( 'user_id' )  ON UPDATE NO ACTION  ON DELETE NO ACTION NOT DEFERRABLE 
+    INDEX 'pk_booking' OTHER UNIQUE PRIMARY ( 'booking_id' );
+
+CREATE OR REPLACE TABLE bv_v_booking I18N us_est (
+        booking_id:long (notnull, autoincrement, sourcetypeid = '-5', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '19'),
+        resort_id:long (notnull, sourcetypeid = '-5', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '19'),
+        booking_date:localdate (notnull, sourcetypeid = '91', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '13'),
+        booking_type_id:long (notnull, sourcetypeid = '-5', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '19'),
+        tour_operator_id:long (sourcetypeid = '-5', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '19'),
+        tour_operator_contract_id:long (sourcetypeid = '-5', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '19'),
+        customer_id:long (notnull, sourcetypeid = '-5', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '19'),
+        arrival_date:localdate (notnull, sourcetypeid = '91', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '13'),
+        arrival_time:time (sourcetypeid = '92', sourcetyperadix = '10', sourcetypedecimals = '6', sourcetypesize = '15'),
+        no_of_pax:long (notnull, sourcetypeid = '-5', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '19'),
+        reservation_start_date:localdate (notnull, sourcetypeid = '91', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '13'),
+        reservation_end_date:localdate (notnull, sourcetypeid = '91', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '13'),
+        no_of_days:long (notnull, sourcetypeid = '-5', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '19'),
+        is_checked_in:int (notnull, sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        room_master_id:long (sourcetypeid = '-5', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '19'),
+        room_fare:decimal (notnull, sourcetypeid = '2', sourcetyperadix = '10', sourcetypedecimals = '2', sourcetypesize = '8'),
+        amount_before_discount:decimal (notnull, sourcetypeid = '2', sourcetyperadix = '10', sourcetypedecimals = '2', sourcetypesize = '8'),
+        percentagediscount:decimal (sourcetypeid = '2', sourcetyperadix = '10', sourcetypedecimals = '2', sourcetypesize = '5'),
+        final_amount:decimal (notnull, sourcetypeid = '2', sourcetyperadix = '10', sourcetypedecimals = '2', sourcetypesize = '8'),
+        departure_date:localdate (sourcetypeid = '91', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '13'),
+        departure_time:time (sourcetypeid = '92', sourcetyperadix = '10', sourcetypedecimals = '6', sourcetypesize = '15'),
+        is_checked_out:int (notnull, sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        customer_enquiry_id:long (sourcetypeid = '-5', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '19'),
+        booking_status:text (sourcetypeid = '-9', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '20'),
+        createddate:localdate (notnull, sourcetypeid = '91', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '13'),
+        modifieddate:localdate (sourcetypeid = '91', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '13'),
+        modifiedby:long (sourcetypeid = '-5', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '19'),
+        currency_id:long (sourcetypeid = '-5', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '19'),
+        tax_amount:decimal (sourcetypeid = '2', sourcetyperadix = '10', sourcetypedecimals = '2', sourcetypesize = '8'),
+        special_requests:text (sourcetypeid = '-9', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '2000'),
+        cancellation_reason:text (sourcetypeid = '-9', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '5000'),
+        cancelled_by:long (sourcetypeid = '-5', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '19'),
+        cancelled_date:localdate (sourcetypeid = '91', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '13')
+    )
+    FOLDER = '/1 - dataconnection/2 - base views'
+    CONSTRAINT 'pk_booking' PRIMARY KEY ( 'booking_id' )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_v_booking(
+        I18N us_est
+        CONSTRAINTS (
+             ADD booking_id (any) OPT ANY
+             ADD resort_id (any) OPT ANY
+             ADD booking_date (any) OPT ANY
+             ADD booking_type_id (any) OPT ANY
+             ADD tour_operator_id (any) OPT ANY
+             ADD tour_operator_contract_id (any) OPT ANY
+             ADD customer_id (any) OPT ANY
+             ADD arrival_date (any) OPT ANY
+             ADD arrival_time (any) OPT ANY
+             ADD no_of_pax (any) OPT ANY
+             ADD reservation_start_date (any) OPT ANY
+             ADD reservation_end_date (any) OPT ANY
+             ADD no_of_days (any) OPT ANY
+             ADD is_checked_in (any) OPT ANY
+             ADD room_master_id (any) OPT ANY
+             ADD room_fare (any) OPT ANY
+             ADD amount_before_discount (any) OPT ANY
+             ADD percentagediscount (any) OPT ANY
+             ADD final_amount (any) OPT ANY
+             ADD departure_date (any) OPT ANY
+             ADD departure_time (any) OPT ANY
+             ADD is_checked_out (any) OPT ANY
+             ADD customer_enquiry_id (any) OPT ANY
+             ADD booking_status (any) OPT ANY
+             ADD createddate (any) OPT ANY
+             ADD modifieddate (any) OPT ANY
+             ADD modifiedby (any) OPT ANY
+             ADD currency_id (any) OPT ANY
+             ADD tax_amount (any) OPT ANY
+             ADD special_requests (any) OPT ANY
+             ADD cancellation_reason (any) OPT ANY
+             ADD cancelled_by (any) OPT ANY
+             ADD cancelled_date (any) OPT ANY
+        )
+        OUTPUTLIST (amount_before_discount, arrival_date, arrival_time, booking_date, booking_id, booking_status, booking_type_id, cancellation_reason, cancelled_by, cancelled_date, createddate, currency_id, customer_enquiry_id, customer_id, departure_date, departure_time, final_amount, is_checked_in, is_checked_out, modifiedby, modifieddate, no_of_days, no_of_pax, percentagediscount, reservation_end_date, reservation_start_date, resort_id, room_fare, room_master_id, special_requests, tax_amount, tour_operator_contract_id, tour_operator_id
+        )
+        WRAPPER (jdbc bv_v_booking)
+    );
+
